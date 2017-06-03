@@ -1,5 +1,7 @@
 import { Matriz } from './matriz'
 
 export interface Objeto {
-    readonly matriz : Matriz;
+    matriz : Matriz;
+    readonly path : Path2D;
+    readonly ready : boolean;
 }
