@@ -1,7 +1,7 @@
-import { Ponto } from './ponto'
-import { Objeto } from './objeto'
+import { Ponto } from '../ponto'
+import { Objeto } from '../objeto'
 import { Linha } from './linha'
-import { MatrizHomo } from './matrizHomo'
+import { MatrizHomo } from '../utils/matrizHomo'
 
 export class Retangulo implements Objeto {
     public readonly path : Path2D

@@ -1,4 +1,4 @@
-import { Matriz } from './matriz'
+import { Matriz } from './utils/matriz'
 
 export interface Objeto {
     matriz : Matriz;

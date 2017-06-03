@@ -1,7 +1,7 @@
-import { Retangulo } from './retangulo'
-import { Linha } from './linha'
+import { Retangulo } from './models/retangulo'
+import { Linha } from './models/linha'
 import { Ponto } from './ponto'
-import { Triangulo } from './triangulo'
+import { Triangulo } from './models/triangulo'
 
 let canvasObject : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas")
 

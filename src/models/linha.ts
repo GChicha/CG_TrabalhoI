@@ -1,6 +1,6 @@
-import { Objeto } from './objeto'
-import { Ponto } from './ponto'
-import { MatrizHomo } from './matrizHomo'
+import { Objeto } from '../objeto'
+import { Ponto } from '../ponto'
+import { MatrizHomo } from '../utils/matrizHomo'
 
 export class Linha implements Objeto {
 
