@@ -10,7 +10,7 @@ export class Matriz {
         this.matrizIntena = new Array(m)
 
         for (let i = 0; i < this.matrizIntena.length; i ++)
-            this.matrizIntena[i] = Array(n).fill(0)
+            this.matrizIntena[i] = new Array(n)
     }
 
     set(x : number, y : number, vlr : number) : void {

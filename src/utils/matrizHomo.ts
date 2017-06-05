@@ -1,6 +1,6 @@
 import { Matriz } from './matriz'
-import { Ponto } from './ponto'
-import { Linha } from './linha'
+import { Ponto } from '../ponto'
+import { Linha } from '../models/linha'
 
 export class MatrizHomo extends Matriz {
     private colAtaul : number = 0; 

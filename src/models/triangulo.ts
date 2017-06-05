@@ -3,15 +3,13 @@ import { Objeto } from '../objeto'
 import { Ponto } from '../ponto'
 import { MatrizHomo } from '../utils/matrizHomo'
 
-export class Triangulo implements Objeto{
-    public path : Path2D;
-    private linhas : Array<Linha> = [];
+export class Triangulo extends Objeto{
+    readonly name : string = "Triangulo"
 
-    constructor(ponto : Ponto, path? : Path2D) {
-        if (path == undefined)
-            this.path = new Path2D();
-        else this.path = path
-        
+    constructor(ponto : Ponto, path : Path2D = new Path2D()) {
+        super()
+        this.path = path;
+        this.seqExec = [this.marcaPonto2, this.marcaPonto3]
         this.linhas.push(new Linha(ponto, this.path))
     }
 
@@ -26,13 +24,6 @@ export class Triangulo implements Objeto{
 
         this.linhas.push(new Linha(ponto, this.path))
         this.linhas[2].destino(this.linhas[0].origem)
-    }
-
-    draw(context : CanvasRenderingContext2D) {
-        this.linhas.forEach((linha : Linha) => {
-            linha.draw(context)
-        })
-        this.path.closePath()
     }
 
     get ready() : boolean {

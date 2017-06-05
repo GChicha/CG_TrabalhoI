@@ -2,6 +2,7 @@ import { Retangulo } from './models/retangulo'
 import { Linha } from './models/linha'
 import { Ponto } from './ponto'
 import { Triangulo } from './models/triangulo'
+import { Objeto } from './objeto'
 
 let canvasObject : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas")
 
@@ -29,51 +30,34 @@ let enableButtons = () : void => {
     trianButton.disabled = false
 }
 
-linhaButton.onclick = () => {
-    disableButtons()
+let objetoAtivo : Objeto;
 
-    canvasObject.onclick = (ev : MouseEvent) => {
-        let linha = new Linha(new Ponto(ev.offsetX, ev.offsetY))
+let objectIter = (ev : MouseEvent) => {
+    objetoAtivo.next(new Ponto(ev.offsetX, ev.offsetY))
 
-        canvasObject.onclick = (ev : MouseEvent) => {
-            linha.destino(new Ponto(ev.offsetX, ev.offsetY));
-
-            linha.draw(canvasContext)
-
-            let row = tabela.insertRow(0)
-            let cell = row.insertCell(0)
-            cell.innerHTML = "Linha"
-
-            canvasObject.onclick = undefined
-
-            enableButtons()
-        }
+    if (objetoAtivo.hasNext) { 
+        canvasObject.onclick = objectIter;
+        objetoAtivo.draw(canvasContext);
     }
-}
+    else {
+        objetoAtivo.draw(canvasContext);
 
-trianButton.onclick = () => {
-    disableButtons()
+        enableButtons();
 
-    canvasObject.onclick = (ev : MouseEvent) => {
-        let triangulo = new Triangulo(new Ponto(ev.offsetX, ev.offsetY))
-        
-        canvasObject.onclick = (ev : MouseEvent) => {
-            triangulo.marcaPonto2(new Ponto(ev.offsetX, ev.offsetY))
-
-            canvasObject.onclick = (ev : MouseEvent) => {
-                triangulo.marcaPonto3(new Ponto(ev.offsetX, ev.offsetY))
-
-                triangulo.draw(canvasContext)
-
-                let row = tabela.insertRow(0)
-                let cell = row.insertCell(0)
-                cell.innerHTML = "Triangulo"
-
-                canvasObject.onclick = undefined
-
-                enableButtons()
-            }
+        let row = tabela.insertRow(0)
+        let cell = row.insertCell(0)
+        cell.innerHTML = objetoAtivo.name;
+        let btnCell = row.insertCell(1)
+        let btnMark : HTMLButtonElement = <HTMLButtonElement>document.createElement("button")
+        btnMark.innerHTML = "Marcar"
+        let x = objetoAtivo
+        btnMark.onclick = () => {
+            x.mark(canvasContext)
         }
+        btnCell.appendChild(btnMark)
+
+        canvasObject.onclick = undefined;
+        objetoAtivo = undefined;
     }
 }
 
@@ -83,18 +67,29 @@ retanButton.onclick = () => {
     canvasObject.onclick = (ev : MouseEvent) => {
         let retangulo = new Retangulo(new Ponto(ev.offsetX, ev.offsetY))
 
-        canvasObject.onclick = (ev : MouseEvent) => {
-            retangulo.marcaPonto2(new Ponto(ev.offsetX, ev.offsetY));
+        objetoAtivo = <Objeto>retangulo;
+        canvasObject.onclick = objectIter;
+    }
+}
 
-            retangulo.draw(canvasContext)
+trianButton.onclick = () => {
+    disableButtons()
 
-            let row = tabela.insertRow(0)
-            let cell = row.insertCell(0)
-            cell.innerHTML = "Retangulo"
+    canvasObject.onclick = (ev : MouseEvent) => {
+        let triangulo = new Triangulo(new Ponto(ev.offsetX, ev.offsetY))
 
-            canvasObject.onclick = undefined
+        objetoAtivo = <Objeto>triangulo;
+        canvasObject.onclick = objectIter;
+    }
+}
 
-            enableButtons()
-        }
+linhaButton.onclick = () => {
+    disableButtons()
+
+    canvasObject.onclick = (ev : MouseEvent) => {
+        let linha = new Linha(new Ponto(ev.offsetX, ev.offsetY))
+
+        objetoAtivo = <Objeto>linha;
+        canvasObject.onclick = objectIter;
     }
 }

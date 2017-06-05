@@ -3,16 +3,14 @@ import { Objeto } from '../objeto'
 import { Linha } from './linha'
 import { MatrizHomo } from '../utils/matrizHomo'
 
-export class Retangulo implements Objeto {
-    public readonly path : Path2D
-    private linhas : Array<Linha> = [];
+export class Retangulo extends Objeto {
+    readonly name : string = "Retangulo"
 
-    constructor(ponto : Ponto, path? : Path2D) {
-        if (path == undefined)
-            this.path = new Path2D();
-        else this.path = path
-
-        this.linhas.push(new Linha(ponto))
+    constructor(ponto : Ponto, path : Path2D = new Path2D()) {
+        super()
+        this.path = path;
+        this.seqExec = [this.marcaPonto2]
+        this.linhas.push(new Linha(ponto, this.path))
     }
 
     get ready() {
@@ -22,33 +20,23 @@ export class Retangulo implements Objeto {
     }
 
     marcaPonto2(ponto : Ponto) {
-        let pontoInter1 = new Ponto(this.linhas[0].origem.x, ponto.y)
-        let pontoInter2 = new Ponto(ponto.y, this.linhas[0].origem.x)
-
         this.linhas[0].destino(new Ponto(this.linhas[0].origem.x, ponto.y))
         
-        this.linhas.push(new Linha(this.linhas[0].fim))
+        this.linhas.push(new Linha(this.linhas[0].fim[0]))
         this.linhas[1].destino(ponto)
 
         this.linhas.push(new Linha(ponto))
-        this.linhas[2].destino(new Ponto(this.linhas[1].fim.x, this.linhas[0].origem.y))
+        this.linhas[2].destino(new Ponto(this.linhas[1].fim[0].x, this.linhas[0].origem.y))
 
-        this.linhas.push(new Linha(this.linhas[2].fim))
+        this.linhas.push(new Linha(this.linhas[2].fim[0]))
         this.linhas[3].destino(this.linhas[0].origem)
-    }
-
-    draw(context : CanvasRenderingContext2D) {
-        this.linhas.forEach((linha : Linha) => {
-            linha.draw(context)
-        })
-        this.path.closePath()
     }
 
     get matriz() : MatrizHomo {
         let matriz : MatrizHomo = new MatrizHomo(2)
 
         matriz.addPonto(this.linhas[0].origem)
-        matriz.addPonto(this.linhas[1].fim)
+        matriz.addPonto(this.linhas[1].fim[0])
 
         return matriz;
     }
