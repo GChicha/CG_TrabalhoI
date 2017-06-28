@@ -10,6 +10,9 @@ export class Triangulo extends Objeto{
         super()
         this.path = path;
         this.seqExec = [this.marcaPonto2, this.marcaPonto3]
+
+        this.origem = ponto
+
         this.linhas.push(new Linha(ponto, this.path))
     }
 
@@ -47,6 +50,8 @@ export class Triangulo extends Objeto{
     
     set matriz(matriz : MatrizHomo) {
         if (matriz.colLength == 3) {
+            this.origem = new Ponto(matriz.get(0, 0), matriz.get(1, 0))
+
             this.linhas = []
 
             this.linhas.push(new Linha(new Ponto(matriz.get(0, 0), matriz.get(1, 0))))

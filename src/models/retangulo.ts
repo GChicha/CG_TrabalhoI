@@ -10,6 +10,9 @@ export class Retangulo extends Objeto {
         super()
         this.path = path;
         this.seqExec = [this.constroiCom2Ponto]
+
+        this.origem = ponto;
+
         this.linhas.push(new Linha(ponto, this.path))
     }
 
@@ -57,6 +60,8 @@ export class Retangulo extends Objeto {
 
     set matriz(matriz : MatrizHomo) {
         if (matriz.n == 4) {
+            this.origem = new Ponto(matriz.get(0, 0), matriz.get(1, 0))
+
             this.linhas = []
 
             this.linhas.push(new Linha(new Ponto(matriz.get(0, 0), matriz.get(1, 0))))
