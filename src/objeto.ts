@@ -12,6 +12,8 @@ export abstract class Objeto {
     protected path : Path2D;
     readonly ready : boolean;
 
+    origem : Ponto;
+
     protected seqExec : Array<(ponto : Ponto) => void>;
     private indexConstr : number = 0;
 

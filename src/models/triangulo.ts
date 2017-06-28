@@ -49,9 +49,9 @@ export class Triangulo extends Objeto{
         if (matriz.colLength == 3) {
             this.linhas = []
 
-            this.linhas.push(new Linha(matriz.getPonto(0)))
-            this.marcaPonto2(matriz.getPonto(1))
-            this.marcaPonto3(matriz.getPonto(2))
+            this.linhas.push(new Linha(new Ponto(matriz.get(0, 0), matriz.get(1, 0))))
+            this.marcaPonto2(new Ponto(matriz.get(0, 1), matriz.get(1, 1)))
+            this.marcaPonto3(new Ponto(matriz.get(0, 2), matriz.get(1, 2)))
         }
         else throw new Error("Matriz entregue é insuficiente")
     }

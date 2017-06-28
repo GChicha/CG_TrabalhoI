@@ -37,6 +37,7 @@ export class Matriz {
 
         for (let i = 0; i < this.m; i++) {
             for (let j = 0; j < matriz.n; j++) {
+                matrizResutante.set(i, j, 0)
                 for (let k = 0; k < this.n; k++) {
                     matrizResutante.set(i, j,
                         matrizResutante.get(i, j) +

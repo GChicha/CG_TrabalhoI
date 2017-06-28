@@ -21,7 +21,11 @@ export class MatrizHomo extends Matriz {
 
     addLinha(linha : Linha) {
         this.addPonto(linha.origem)
-        this.addPonto(linha.fim)
+        this.addPonto(linha.fim[0])
+    }
+
+    get numPontos() : number {
+        return this.n
     }
 
     /* Retorna o ponto a partir da matriz
