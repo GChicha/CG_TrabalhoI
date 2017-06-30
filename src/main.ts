@@ -28,28 +28,28 @@ let gC = new  GerenciadorCanvas(canvasObject, tabela, {
 
 trianButton.onclick = () => {
     canvasObject.onclick = (ev : MouseEvent) => {
-        let obj = new Triangulo(new Ponto(ev.offsetX, ev.offsetY))
+        let obj = new Triangulo(new Ponto(GerenciadorCanvas.getMousePos(ev).x, GerenciadorCanvas.getMousePos(ev).y))
         gC.registraObjeto(obj)
     }
 }
 
 linhaButton.onclick = () => {
     canvasObject.onclick = (ev : MouseEvent) => {
-        let obj = new Linha(new Ponto(ev.offsetX, ev.offsetY))
+        let obj = new Linha(new Ponto(GerenciadorCanvas.getMousePos(ev).x, GerenciadorCanvas.getMousePos(ev).y))
         gC.registraObjeto(obj)
     }
 }
 
 retanButton.onclick = () => {
     canvasObject.onclick = (ev : MouseEvent) => {
-        let obj = new Retangulo(new Ponto(ev.offsetX, ev.offsetY))
+        let obj = new Retangulo(new Ponto(GerenciadorCanvas.getMousePos(ev).x, GerenciadorCanvas.getMousePos(ev).y))
         gC.registraObjeto(obj)
     }
 }
 
 circuButton.onclick = () => {
     canvasObject.onclick = (ev : MouseEvent) => {
-        let obj = new Circulo(new Ponto(ev.offsetX, ev.offsetY))
+        let obj = new Circulo(new Ponto(GerenciadorCanvas.getMousePos(ev).x, GerenciadorCanvas.getMousePos(ev).y))
         gC.registraObjeto(obj)
     }
 }

@@ -51,6 +51,15 @@ export class GerenciadorCanvas {
         this.buttons.linha.disabled = false
     }
 
+    public static getMousePos(evt : MouseEvent) {
+        let canvas = evt.target as HTMLCanvasElement;
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    } 
+
     private cellInsert(row : HTMLTableRowElement, objeto : {
         objeto : Objeto,
         estado : {
@@ -65,7 +74,7 @@ export class GerenciadorCanvas {
 
         // Celula botão de destaque
         let cellButtonDestacar = row.insertCell()
-        let buttonDestacar : HTMLButtonElement = <HTMLButtonElement>document.createElement("button");
+        let buttonDestacar : HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
         buttonDestacar.innerHTML = "Destacar"
 
         let destFun = () => {
@@ -90,7 +99,7 @@ export class GerenciadorCanvas {
             let graus : number = +(prompt("Quantos graus deve rotacionar?"))
 
             this.elemento.onclick = (ev : MouseEvent) => {
-                pontoGiro = new Ponto(ev.offsetX, ev.offsetY)
+                pontoGiro = new Ponto(GerenciadorCanvas.getMousePos(ev).x, GerenciadorCanvas.getMousePos(ev).y)
 
                 let matrizAnt = objeto.estado.matriz;
 
@@ -179,7 +188,7 @@ export class GerenciadorCanvas {
         }
         else {
             let iterObjeto = (ev : MouseEvent) => {
-                objeto.next(new Ponto(ev.offsetX, ev.offsetY))
+                objeto.next(new Ponto(GerenciadorCanvas.getMousePos(ev).x, GerenciadorCanvas.getMousePos(ev).y))
 
                 if (objeto.hasNext) {
                     this.elemento.onclick = iterObjeto;

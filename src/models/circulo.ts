@@ -34,7 +34,7 @@ export class Circulo extends Objeto{
     private calcDistToCenter() : number{
         let distance : number = 0;
 
-        distance = Math.abs(this.origem.x - this.ponto2.x) + Math.abs(this.origem.y - this.ponto2.y)
+        distance = Math.sqrt(Math.pow(this.origem.x - this.ponto2.x, 2) + Math.pow(this.origem.y - this.ponto2.y, 2))
 
         return distance;
     }
