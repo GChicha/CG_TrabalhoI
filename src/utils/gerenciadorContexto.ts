@@ -68,6 +68,7 @@ export class GerenciadorCanvas {
         },
         row: HTMLTableRowElement
     }) {
+        row.setAttribute("scope", "row")
         // Celula do nome
         let cellName = row.insertCell()
         cellName.innerHTML = objeto.objeto.name
@@ -75,13 +76,15 @@ export class GerenciadorCanvas {
         // Celula botão de destaque
         let cellButtonDestacar = row.insertCell()
         let buttonDestacar : HTMLButtonElement = document.createElement("button") as HTMLButtonElement;
-        buttonDestacar.innerHTML = "Destacar"
+        let spanHide = document.createElement("i")
+        spanHide.classList.add("fa")
+        spanHide.classList.add("fa-eye-slash")
+        buttonDestacar.appendChild(spanHide)
+        buttonDestacar.classList.add("btn")
 
         let destFun = () => {
             objeto.objeto.mark(this.contexto)
-            buttonDestacar.innerHTML = "Tirar Destaque"
             buttonDestacar.onclick = () => {
-                buttonDestacar.innerHTML = "Destacar"
                 objeto.objeto.unMark(this.contexto)
                 buttonDestacar.onclick = destFun
             }
@@ -91,8 +94,13 @@ export class GerenciadorCanvas {
 
         // Celula botão de rotação
         let cellButtonRotate = row.insertCell();
+        let spanRotate = document.createElement("i")
+        spanRotate.classList.add("fa")
+        spanRotate.classList.add("fa-repeat")
+        spanRotate.setAttribute("aria-hidden", "true")
         let buttonRotate : HTMLButtonElement = document.createElement("button")
-        buttonRotate.innerHTML = "Rotacionar"
+        buttonRotate.classList.add("btn")
+        buttonRotate.appendChild(spanRotate)
 
         let pontoGiro : Ponto
         let rotFunction = () => {
@@ -122,7 +130,11 @@ export class GerenciadorCanvas {
         // Celula botão de translação
         let cellButtonTrans = row.insertCell();
         let buttonTrans : HTMLButtonElement = document.createElement("button")
-        buttonTrans.innerHTML = "Transladar"
+        buttonTrans.classList.add("btn")
+        let spanTrans = document.createElement("i")
+        spanTrans.classList.add("fa")
+        spanTrans.classList.add("fa-arrows")
+        buttonTrans.appendChild(spanTrans)
 
         let transFunction = () => {
             let x : number = +(prompt("Para onde deve mover - x?"))
@@ -144,7 +156,11 @@ export class GerenciadorCanvas {
         // Celula botão de escala
         let cellButtonMEscala = row.insertCell();
         let buttonEscala : HTMLButtonElement = document.createElement("button")
-        buttonEscala.innerHTML = "Mudar escala"
+        let spanEscale = document.createElement("i")
+        spanEscale.classList.add("fa")
+        spanEscale.classList.add("fa-expand")
+        buttonEscala.appendChild(spanEscale)
+        buttonEscala.classList.add("btn")
 
         let mudaEscala = () => {
             let multiplicador : number = +(prompt("Quanto será o multiplicador de escala?"))

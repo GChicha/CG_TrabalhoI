@@ -3,23 +3,41 @@
     <head>
         <meta charset="utf-8">
         <title>Computação Grafica</title>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" >
+		<link rel="stylesheet" href="font-awesome.min.css" >
     </head>
     <body>
-        <div>
-            <button class="btn-des" type="button" id="linha">&verbar;</button>
-            <button class="btn-des" type="button" id="retan">&#8414;</button>
-            <button class="btn-des" type="button" id="trian">&lrtri;</button>
-            <button class="btn-des" type="button" id="circu">&#8413;</button>
+        <div class="page-header">
+            <h1>Trabalho de CG</h1>
         </div>
-        <canvas id="canvas" style="border:1px solid #d3d3d3" width="500" height="500"></canvas>
-        <table id="tabela_obj"></table>
+        <div class=row>
+            <div class="col-1 btn-group-vertical">
+                <button class="btn btn-outline btn-secondary" type="button" id="linha">&#124;</button>
+                <button class="btn btn-outline btn-secondary" type="button" id="retan"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+                <button class="btn btn-outline btn-secondary" type="button" id="trian">&lrtri;</button>
+                <button class="btn btn-outline btn-secondary" type="button" id="circu"><i class="fa fa-circle-thin" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-11 container-fluid">
+                <canvas id="canvas" class="bg-faded" width="800" height="400" ></canvas>
+            </div>
+        </div>
+        <div class=row>
+            <div class="col-10 offset-1 btn-group-vertical">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Objeto</th>
+                            <th>Destacar</th>
+                            <th>Rotacionar</th>
+                            <th>Transladar</th>
+                            <th>Escala</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela_obj" >
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <script src="./dist/main.js" charset="utf-8"></script>
-        <style>
-            .btn-des {
-                font-size : 20pt;
-                width : 50px;
-                height : 50px;
-            }
-        </style>
     </body>
 </html>
